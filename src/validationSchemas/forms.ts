@@ -1,14 +1,14 @@
 import z from "zod";
 
-export const loginSchema = z.object({
+export const signInSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
 });
 
-export type LoginSchema = z.infer<typeof loginSchema>;
+export type SignInSchemaType = z.infer<typeof signInSchema>;
 
 // Password should have stronger validation
-export const registerSchema = loginSchema
+export const signUpSchema = signInSchema
   .extend({
     confirmPassword: z.string().min(4),
   })
@@ -17,4 +17,4 @@ export const registerSchema = loginSchema
     path: ["confirmPassword"],
   });
 
-export type RegisterSchema = z.infer<typeof registerSchema>;
+export type SignUpSchemaType = z.infer<typeof signUpSchema>;
