@@ -22,12 +22,20 @@ const SignInForm = () => {
       noValidate
       autoComplete="off"
       onSubmit={handleSubmit(onSubmit)}
+      display="flex"
+      flexDirection="column"
+      padding="2rem"
+      sx={{backgroundColor: "rgba(255, 255, 255, 0.3)"}}
+      borderRadius="10px"
+      gap="1rem"
+      textAlign="center"
+      boxShadow="0 4px 12px rgba(0, 0, 0, 0.6)"
     >
       <TextField
         {...register("email")}
         helperText={errors.email?.message}
         type="text"
-        label="Email"
+        label="Email" 
         variant="outlined"
         placeholder="Email"
       />
@@ -45,13 +53,14 @@ const SignInForm = () => {
         type="submit"
         disabled={isSubmitting}
         onClick={handleSubmit(onSubmit)}
+        variant="contained"
       >
         Sign In
       </Button>
 
       <Typography>
         Don't have an account ?{" "}
-        <Typography component="a" href="/sign-up">
+        <Typography component="a" href="/sign-up" color="black">
           Sign Up
         </Typography>
       </Typography>

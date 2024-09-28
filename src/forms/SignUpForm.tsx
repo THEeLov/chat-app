@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { signUpSchema, SignUpSchemaType } from "../validationSchemas/forms";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,6 +22,14 @@ const SignUpForm = () => {
       noValidate
       autoComplete="off"
       onSubmit={handleSubmit(onSubmit)}
+      display="flex"
+      flexDirection="column"
+      padding="2rem"
+      sx={{ backgroundColor: "rgba(255, 255, 255, 0.3)" }}
+      borderRadius="10px"
+      gap="1rem"
+      textAlign="center"
+      boxShadow="0 4px 12px rgba(0, 0, 0, 0.6)"
     >
       <TextField
         {...register("email")}
@@ -44,9 +52,20 @@ const SignUpForm = () => {
         type="Confirm Password"
       />
 
-      <Button type="submit" onClick={handleSubmit(onSubmit)}>
+      <Button
+        type="submit"
+        onClick={handleSubmit(onSubmit)}
+        variant="contained"
+      >
         Sign Up
       </Button>
+
+      <Typography>
+        Already have an account ?{" "}
+        <Typography component="a" href="/sign-in" color="black">
+          Sign In
+        </Typography>
+      </Typography>
     </Box>
   );
 };

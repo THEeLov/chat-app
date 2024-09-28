@@ -3,7 +3,7 @@ import SignInForm from "../forms/SignInForm";
 
 const SignIn = () => {
   return (
-    <Box>
+    <Box padding="1rem">
       <SignInForm />
     </Box>
   );
