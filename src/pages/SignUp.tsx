@@ -1,7 +1,12 @@
+import { Box } from "@mui/material";
+import SignUpForm from "../forms/SignUpForm";
+
 const SignUp = () => {
   return (
-    <div>SignUp</div>
-  )
-}
+    <Box>
+      <SignUpForm />
+    </Box>
+  );
+};
 
-export default SignUp
+export default SignUp;

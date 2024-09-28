@@ -13,7 +13,7 @@ const SignInForm = () => {
   });
 
   const onSubmit = (data: SignInSchemaType) => {
-    // handle form submission
+    console.log(data);
   };
 
   return (
@@ -51,7 +51,7 @@ const SignInForm = () => {
 
       <Typography>
         Don't have an account ?{" "}
-        <Typography component="a" href="/signUp">
+        <Typography component="a" href="/sign-up">
           Sign Up
         </Typography>
       </Typography>
