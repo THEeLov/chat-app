@@ -32,6 +32,13 @@ const SignUpForm = () => {
       boxShadow="0 4px 12px rgba(0, 0, 0, 0.6)"
     >
       <TextField
+        {...register("username")}
+        helperText={errors.username?.message}
+        label="Username"
+        placeholder="Username"
+      />
+      
+      <TextField
         {...register("email")}
         helperText={errors.email?.message}
         label="Email"
