@@ -8,7 +8,6 @@ const MainLayout = () => {
       sx={{
         minHeight: "100vh",
         width: "100vw",
-        position: "relative",
         overflow: "hidden",
         display: "flex",
         justifyContent: "center",
@@ -32,16 +31,7 @@ const MainLayout = () => {
           transform: "scale(1.05)",
         }}
       />
-      
-      {/* Content Layer */}
-      <Box
-        sx={{
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
-        <Outlet />
-      </Box>
+      <Outlet />
     </Box>
   );
 };

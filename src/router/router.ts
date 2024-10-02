@@ -3,6 +3,7 @@ import MainLayout from "../layouts/MainLayout";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import React from "react";
+import Chats from "../pages/Chats";
 
 export const router = createBrowserRouter([
   {
@@ -12,12 +13,13 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: React.createElement(Navigate, {
-          to: "/sign-in",
+          to: "/signin",
           replace: true,
         }),
       },
-      { path: "/sign-in", Component: SignIn },
-      { path: "/sign-up", Component: SignUp },
+      { path: "/signin", Component: SignIn },
+      { path: "/signup", Component: SignUp },
+      { path: "/chats", Component: Chats },
     ],
   },
 ]);

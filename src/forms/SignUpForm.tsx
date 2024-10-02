@@ -5,10 +5,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSignUp } from "../hooks/useAuth";
 import useAuthData from "../hooks/useAuthData";
 import { isAxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
   const { mutateAsync: signUpUser } = useSignUp();
-  const { signUp } = useAuthData();
+  const { signUp, user } = useAuthData();
+  const navigate = useNavigate();
+
+  if (user) {
+    navigate("/chats");
+  }
 
   const {
     register,
@@ -23,6 +29,7 @@ const SignUpForm = () => {
     try {
       const result = await signUpUser(data);
       signUp(result);
+      navigate("/chats");
     } catch (error) {
       if (isAxiosError(error)) {
         const statusCode = error.response?.status;
@@ -93,7 +100,7 @@ const SignUpForm = () => {
 
       <Typography>
         Already have an account ?{" "}
-        <Typography component="a" href="/sign-in" color="black">
+        <Typography component="a" href="/signin" color="black">
           Sign In
         </Typography>
       </Typography>

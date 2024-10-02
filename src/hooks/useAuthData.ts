@@ -1,6 +1,6 @@
 import useLocalStorageState from "use-local-storage-state";
 import { useCallback } from "react";
-import { User, SignInData, Token } from "../types";
+import { User, SignInData } from "../types";
 
 const AUTH_DATA_STORAGE_KEY = "authData";
 const AUTH_DATA_DEFAULT = null;
