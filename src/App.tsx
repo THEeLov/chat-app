@@ -3,15 +3,18 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { router } from "./router/router";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const queryClient = new QueryClient();
 
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
+      <ToastContainer />
       <ThemeProvider theme={theme}>
         {/* <AuthProvider> */}
-          <RouterProvider router={router} />
+        <RouterProvider router={router} />
         {/* </AuthProvider> */}
       </ThemeProvider>
     </QueryClientProvider>
