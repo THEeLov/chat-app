@@ -2,18 +2,39 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { signUpSchema, SignUpSchemaType } from "../validationSchemas/forms";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSignUp } from "../hooks/useAuth";
+import useAuthData from "../hooks/useAuthData";
+import { isAxiosError } from "axios";
 
 const SignUpForm = () => {
+  const { mutateAsync: signUpUser } = useSignUp();
+  const { signUp } = useAuthData();
+
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<SignUpSchemaType>({
     resolver: zodResolver(signUpSchema),
   });
 
-  const onSubmit = (data: SignUpSchemaType) => {
-    console.log(data);
+  const onSubmit = async (data: SignUpSchemaType) => {
+    try {
+      const result = await signUpUser(data);
+      signUp(result);
+    } catch (error) {
+      if (isAxiosError(error)) {
+        const statusCode = error.response?.status;
+        console.log()
+        setError("root", {
+          message:
+            statusCode === 409
+              ? "Email is already taken"
+              : "Internal server error",
+        });
+      }
+    }
   };
 
   return (
@@ -37,7 +58,7 @@ const SignUpForm = () => {
         label="Username"
         placeholder="Username"
       />
-      
+
       <TextField
         {...register("email")}
         helperText={errors.email?.message}
@@ -56,8 +77,10 @@ const SignUpForm = () => {
         {...register("confirmPassword")}
         helperText={errors.confirmPassword?.message}
         label="Confirm Password"
-        type="Confirm Password"
+        type="password"
       />
+
+      {errors.root && <Typography color="error"> {errors.root.message}</Typography>}
 
       <Button
         type="submit"

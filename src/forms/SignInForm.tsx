@@ -2,18 +2,39 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { signInSchema, SignInSchemaType } from "../validationSchemas/forms";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSignIn } from "../hooks/useAuth";
+import useAuthData from "../hooks/useAuthData";
+import { isAxiosError } from "axios";
 
 const SignInForm = () => {
+  const { mutateAsync: signInUser } = useSignIn();
+  const { signIn } = useAuthData();
+
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<SignInSchemaType>({
     resolver: zodResolver(signInSchema),
   });
 
-  const onSubmit = (data: SignInSchemaType) => {
-    console.log(data);
+  const onSubmit = async (data: SignInSchemaType) => {
+    try {
+      const response = await signInUser(data);
+      signIn(response);
+    } catch (error) {
+      if (isAxiosError(error)) {
+        const statusCode = error.response?.status;
+        console.log();
+        setError("root", {
+          message:
+            statusCode === 401
+              ? "Invalid email or password"
+              : "Internal server error",
+        });
+      }
+    }
   };
 
   return (
@@ -25,7 +46,7 @@ const SignInForm = () => {
       display="flex"
       flexDirection="column"
       padding="2rem"
-      sx={{backgroundColor: "rgba(255, 255, 255, 0.3)"}}
+      sx={{ backgroundColor: "rgba(255, 255, 255, 0.3)" }}
       borderRadius="10px"
       gap="1rem"
       textAlign="center"
@@ -35,7 +56,7 @@ const SignInForm = () => {
         {...register("email")}
         helperText={errors.email?.message}
         type="text"
-        label="Email" 
+        label="Email"
         variant="outlined"
         placeholder="Email"
       />
@@ -43,11 +64,15 @@ const SignInForm = () => {
       <TextField
         {...register("password")}
         helperText={errors.password?.message}
-        type="text"
+        type="password"
         label="Password"
         variant="outlined"
         placeholder="Email"
       />
+
+      {errors.root && (
+        <Typography color="error">{errors.root.message}</Typography>
+      )}
 
       <Button
         type="submit"

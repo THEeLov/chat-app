@@ -18,7 +18,6 @@ export const router = createBrowserRouter([
       },
       { path: "/sign-in", Component: SignIn },
       { path: "/sign-up", Component: SignUp },
-      // Add more routes here...
     ],
   },
 ]);
