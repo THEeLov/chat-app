@@ -63,6 +63,7 @@ const SignUpForm = () => {
         type="submit"
         onClick={handleSubmit(onSubmit)}
         variant="contained"
+        disabled={isSubmitting}
       >
         Sign Up
       </Button>
