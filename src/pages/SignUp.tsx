@@ -11,7 +11,7 @@ const SignUp = () => {
   }
 
   return (
-    <Box sx={{ backdropFilter: "blur(10px)" }}>
+    <Box sx={{ backdropFilter: "blur(12px)" }} borderRadius="10px">
       <SignUpForm />
     </Box>
   );
