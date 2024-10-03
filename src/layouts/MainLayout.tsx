@@ -27,7 +27,6 @@ const MainLayout = () => {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           zIndex: -1,
-          filter: "blur(12px)",
           transform: "scale(1.05)",
         }}
       />

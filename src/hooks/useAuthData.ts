@@ -12,27 +12,24 @@ const useAuthData = () => {
       defaultValue: AUTH_DATA_DEFAULT,
     }
   );
-  const [token, setToken] = useLocalStorageState<string | null>("token", {
-    defaultValue: null,
-  });
 
   const signIn = (data: SignInData) => {
     setUserData(data.user);
-    setToken(data.authToken);
+    localStorage.setItem("token", data.authToken);
   };
 
   const signUp = (data: SignInData) => {
     setUserData(data.user);
-    setToken(data.authToken);
+    localStorage.setItem("token", data.authToken);
   }
 
   const signOut = useCallback(() => {
     setUserData(AUTH_DATA_DEFAULT);
+    localStorage.removeItem("token");
   }, [setUserData]);
 
   return {
     user,
-    token,
     signIn,
     signUp,
     signOut,

@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("token");
 
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
@@ -23,6 +23,6 @@ axiosInstance.interceptors.request.use(
 export const getUserConversations = async (
   userId: string
 ): Promise<Conversation[]> => {
-  const resp = await axiosInstance.post(`/${userId}`);
+  const resp = await axiosInstance.get(`/${userId}`);
   return resp.data;
 };

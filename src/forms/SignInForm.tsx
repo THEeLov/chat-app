@@ -9,12 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 const SignInForm = () => {
   const { mutateAsync: signInUser } = useSignIn();
-  const { signIn, user } = useAuthData();
+  const { signIn } = useAuthData();
   const navigate = useNavigate();
-
-  if (user) {
-    navigate("/chats");
-  }
 
   const {
     register,

@@ -1,14 +1,9 @@
 import { Box } from "@mui/material";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { useNavigate } from "react-router-dom";
+import UserChats from "../components/UserChats";
 
 const Chats = () => {
-  const navigate = useNavigate();
-  // const { data: userConversations, isLoading } = useUserConversations(
-  //   user?._id!
-  // );
-
   return (
     <Box
       minHeight="500px"
@@ -18,10 +13,11 @@ const Chats = () => {
       display="flex"
       flexDirection="column"
       justifyContent="space-between"
-      sx={{ backgroundColor: "rgba(255, 255, 255, 0.4)" }}
+      sx={{ backgroundColor: "rgba(255, 255, 255, 0.4)", backdropFilter: "blur(10px)"}}
+      
     >
       <Navbar />
-      <Box flex={1}>This is body</Box>
+      <UserChats />
       <Footer />
     </Box>
   );

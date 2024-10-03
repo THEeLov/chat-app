@@ -26,7 +26,7 @@ export type Message = {
 
 export type Conversation = {
   _id: string;
-  participants: string[];
+  participants: User[];
   messages: Message[];
   createdAt: Date;
   updatedAt: Date;

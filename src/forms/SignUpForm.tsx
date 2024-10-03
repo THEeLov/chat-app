@@ -9,12 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
   const { mutateAsync: signUpUser } = useSignUp();
-  const { signUp, user } = useAuthData();
+  const { signUp } = useAuthData();
   const navigate = useNavigate();
-
-  if (user) {
-    navigate("/chats");
-  }
 
   const {
     register,
@@ -33,7 +29,7 @@ const SignUpForm = () => {
     } catch (error) {
       if (isAxiosError(error)) {
         const statusCode = error.response?.status;
-        console.log()
+        console.log();
         setError("root", {
           message:
             statusCode === 409
@@ -87,7 +83,9 @@ const SignUpForm = () => {
         type="password"
       />
 
-      {errors.root && <Typography color="error"> {errors.root.message}</Typography>}
+      {errors.root && (
+        <Typography color="error"> {errors.root.message}</Typography>
+      )}
 
       <Button
         type="submit"
