@@ -4,6 +4,7 @@ import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import React from "react";
 import Chats from "../pages/Chats";
+import ProtectedRouteLayout from "../layouts/ProtectedRouteLayout";
 
 export const router = createBrowserRouter([
   {
@@ -19,7 +20,11 @@ export const router = createBrowserRouter([
       },
       { path: "/signin", Component: SignIn },
       { path: "/signup", Component: SignUp },
-      { path: "/chats", Component: Chats },
+      {
+        path: "/chats",
+        Component: ProtectedRouteLayout,
+        children: [{ path: "", Component: Chats }],
+      },
     ],
   },
 ]);

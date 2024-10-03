@@ -10,7 +10,7 @@ export type SignInSchemaType = z.infer<typeof signInSchema>;
 // Password should have stronger validation
 export const signUpSchema = signInSchema
   .extend({
-    username: z.string(),
+    username: z.string().min(1, "Username is required"),
     confirmPassword: z.string().min(4, "At least 4 characters required"),
   })
   .refine((data) => data.password === data.confirmPassword, {
