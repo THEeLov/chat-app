@@ -19,7 +19,7 @@ const UserChats = () => {
   }
 
   return (
-    <Box display="flex" border="1px solid black" flex={1}>
+    <Box display="flex" flex={1}>
       {/* Conversations Sidebar */}
       <Box width="250px">
         {userConversations?.map((conversation) => <UserCard conservation={conversation} />)}

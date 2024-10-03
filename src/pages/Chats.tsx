@@ -6,9 +6,9 @@ import UserChats from "../components/UserChats";
 const Chats = () => {
   return (
     <Box
-      minHeight="500px"
+      minHeight="600px"
       borderRadius="8px"
-      maxWidth="900px"
+      maxWidth="1020px"
       width="100%"
       display="flex"
       flexDirection="column"
