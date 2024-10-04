@@ -5,9 +5,11 @@ import { Conversation } from "../types";
 const UserCard = ({
   conservation,
   handleSwap,
+  convId
 }: {
   conservation: Conversation;
-  handleSwap: (id: string) => void;
+  handleSwap: (recId: string, conId: string) => void;
+  convId: string;
 }) => {
   const [user1, user2] = conservation.participants;
   const { user } = useAuthData();
@@ -28,7 +30,7 @@ const UserCard = ({
         },
       }}
       component="div"
-      onClick={() => handleSwap(receiver._id)}
+      onClick={() => handleSwap(receiver._id, convId)}
     >
       <Box>
         <Avatar src={receiver.profilePic} />

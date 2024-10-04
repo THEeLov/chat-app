@@ -4,10 +4,12 @@ import { useUserConversations } from "../hooks/useUser";
 import UserCard from "./UserCard";
 import SendMessageForm from "../forms/SendMessageForm";
 import { useState } from "react";
+import ShowUserMessages from "./ShowUserMessages";
 
 const UserChats = () => {
   const { user } = useAuthData();
   const [receiverId, setReceiverId] = useState<string | null>(null);
+  const [conversationId, setConversationId] = useState<string | null>(null);
 
   const { data: userConversations, isLoading } = useUserConversations(
     user?._id!
@@ -22,8 +24,9 @@ const UserChats = () => {
     );
   }
 
-  const handleChatSwap = (id: string) => {
-    setReceiverId(id);
+  const handleChatSwap = (recId: string, convId: string) => {
+    setReceiverId(recId);
+    setConversationId(convId);
   };
 
   return (
@@ -31,16 +34,20 @@ const UserChats = () => {
       {/* Conversations Sidebar */}
       <Box width="250px" borderRight="1px solid grey">
         {userConversations?.map((conversation) => (
-          <UserCard conservation={conversation} handleSwap={handleChatSwap} />
+          <UserCard
+            conservation={conversation}
+            handleSwap={handleChatSwap}
+            convId={conversation._id}
+          />
         ))}
       </Box>
 
       {/* Chat Window */}
-      {receiverId === null ? (
+      {receiverId === null || conversationId === null ? (
         <Box> Hello user </Box>
       ) : (
         <Box display="flex" flexDirection="column" flex={1}>
-          <Box sx={{ flexGrow: 1, marginTop: 2, overflowY: "auto" }}>Chats</Box>
+          <ShowUserMessages convId={conversationId} />
           <Box padding="0.5rem">
             <SendMessageForm receiverId={receiverId} />
           </Box>

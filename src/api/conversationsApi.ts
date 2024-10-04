@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Conversation } from "../types";
+import { Conversation, Message } from "../types";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3000/api/conversations",
@@ -26,3 +26,8 @@ export const getUserConversations = async (
   const resp = await axiosInstance.get(`/${userId}`);
   return resp.data;
 };
+
+export const getConversationMessages = async (conversationId: string): Promise<Message[]> => {
+  const resp = await axiosInstance.get(`/messages/${conversationId}`);
+  return resp.data;
+}
