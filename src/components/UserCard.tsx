@@ -9,12 +9,24 @@ const UserCard = ({ conservation }: { conservation: Conversation }) => {
   const receiver = user?._id! === user1._id ? user2 : user1;
 
   return (
-    <Box display="flex" padding="1rem" alignContent="center" border="1px solid black" gap="1rem">
+    <Box
+      display="flex"
+      padding="1rem"
+      alignContent="center"
+      gap="1rem"
+      sx={{
+        transition: 'background 0.2s ease-in-out',
+        "&:hover": {
+          cursor: "pointer",
+          background: "rgba(255,255,255,0.05)"
+        },
+      }}
+    >
       <Box>
         <Avatar src={receiver.profilePic} />
       </Box>
       <Box display="flex" alignItems="center">
-        <Typography >{receiver.username}</Typography>
+        <Typography>{receiver.username}</Typography>
       </Box>
     </Box>
   );

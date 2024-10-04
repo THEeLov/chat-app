@@ -21,11 +21,11 @@ const UserChats = () => {
   return (
     <Box display="flex" flex={1}>
       {/* Conversations Sidebar */}
-      <Box width="250px">
+      <Box width="250px" borderRight="1px solid grey">
         {userConversations?.map((conversation) => <UserCard conservation={conversation} />)}
       </Box>
 
-      <Divider orientation="vertical"/>
+
       {/* Chat Window */}
       <Box>
         <Box sx={{ flexGrow: 1, marginTop: 2, overflowY: "auto" }}>Chats</Box>
