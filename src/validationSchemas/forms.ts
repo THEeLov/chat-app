@@ -19,3 +19,9 @@ export const signUpSchema = signInSchema
   });
 
 export type SignUpSchemaType = z.infer<typeof signUpSchema>;
+
+export const sendMessageSchema = z.object({
+  message: z.string().min(1)
+})
+
+export type SendMessageSchemaType = z.infer<typeof sendMessageSchema>

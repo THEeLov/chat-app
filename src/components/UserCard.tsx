@@ -2,7 +2,13 @@ import { Avatar, Box, Typography } from "@mui/material";
 import useAuthData from "../hooks/useAuthData";
 import { Conversation } from "../types";
 
-const UserCard = ({ conservation }: { conservation: Conversation }) => {
+const UserCard = ({
+  conservation,
+  handleSwap,
+}: {
+  conservation: Conversation;
+  handleSwap: (id: string) => void;
+}) => {
   const [user1, user2] = conservation.participants;
   const { user } = useAuthData();
 
@@ -15,12 +21,14 @@ const UserCard = ({ conservation }: { conservation: Conversation }) => {
       alignContent="center"
       gap="1rem"
       sx={{
-        transition: 'background 0.2s ease-in-out',
+        transition: "background 0.2s ease-in-out",
         "&:hover": {
           cursor: "pointer",
-          background: "rgba(255,255,255,0.05)"
+          background: "rgba(255,255,255,0.05)",
         },
       }}
+      component="div"
+      onClick={() => handleSwap(receiver._id)}
     >
       <Box>
         <Avatar src={receiver.profilePic} />
