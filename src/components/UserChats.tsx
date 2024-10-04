@@ -38,6 +38,7 @@ const UserChats = () => {
             conservation={conversation}
             handleSwap={handleChatSwap}
             convId={conversation._id}
+            isActive={conversationId === conversation._id}
           />
         ))}
       </Box>
@@ -46,7 +47,7 @@ const UserChats = () => {
       {receiverId === null || conversationId === null ? (
         <Box> Hello user </Box>
       ) : (
-        <Box display="flex" flexDirection="column" flex={1}>
+        <Box display="flex" flexDirection="column" flex={1} justifyContent="space-between">
           <ShowUserMessages convId={conversationId} />
           <Box padding="0.5rem">
             <SendMessageForm receiverId={receiverId} />

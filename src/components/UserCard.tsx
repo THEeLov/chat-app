@@ -5,11 +5,13 @@ import { Conversation } from "../types";
 const UserCard = ({
   conservation,
   handleSwap,
-  convId
+  convId,
+  isActive
 }: {
   conservation: Conversation;
   handleSwap: (recId: string, conId: string) => void;
   convId: string;
+  isActive: boolean;
 }) => {
   const [user1, user2] = conservation.participants;
   const { user } = useAuthData();
@@ -24,9 +26,10 @@ const UserCard = ({
       gap="1rem"
       sx={{
         transition: "background 0.2s ease-in-out",
+        background: isActive ? "rgba(255,255,255,0.2)" : "transparent",
         "&:hover": {
           cursor: "pointer",
-          background: "rgba(255,255,255,0.05)",
+          background: "rgba(255,255,255,0.2)",
         },
       }}
       component="div"
