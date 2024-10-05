@@ -69,9 +69,7 @@ const UserChats = () => {
           flex={1}
           justifyContent="space-between"
         >
-          <Box overflow="auto">
-            <ShowUserMessages convId={conversationId} />
-          </Box>
+          <ShowUserMessages convId={conversationId} />
           <Box padding="0.5rem">
             <SendMessageForm receiverId={receiverId} />
           </Box>

@@ -27,7 +27,7 @@ const Navbar = () => {
               userSelect: "none"
             }}
           >
-            BOLT CHAT
+            BOLT
           </Typography>
         </Box>
 

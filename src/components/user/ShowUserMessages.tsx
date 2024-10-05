@@ -1,8 +1,8 @@
 import { Avatar, Box, LinearProgress, Paper, Typography } from "@mui/material";
 import { useConversation } from "../../hooks/useConversation";
 import useAuthData from "../../hooks/useAuthData";
-import { useEffect, useRef, useState } from "react";
 import { useListenMessages } from "../../hooks/useListenMessages";
+import { useEffect, useRef } from "react";
 
 const ShowUserMessages = ({ convId }: { convId: string }) => {
   const { data: usersConversation, isLoading } = useConversation(convId);
@@ -14,10 +14,11 @@ const ShowUserMessages = ({ convId }: { convId: string }) => {
 
   useEffect(() => {
     if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView();
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
     }
-  }, [usersConversation]);
+  }, [messages]);
 
+  
   if (isLoading) {
     return <LinearProgress />;
   }
@@ -26,11 +27,9 @@ const ShowUserMessages = ({ convId }: { convId: string }) => {
 
   return (
     <Box
-      flex={1}
-      display="flex"
-      flexDirection="column"
-      justifyContent="flex-end"
       padding="1rem"
+      overflow="auto"
+      ref={messagesEndRef}
     >
       {usersConversation &&
         messages.map((message) => {
@@ -81,8 +80,6 @@ const ShowUserMessages = ({ convId }: { convId: string }) => {
             </Box>
           );
         })}
-
-      <div ref={messagesEndRef} />
     </Box>
   );
 };
