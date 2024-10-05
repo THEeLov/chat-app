@@ -1,9 +1,9 @@
-import { Box, CircularProgress, Divider, Typography } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import useAuthData from "../hooks/useAuthData";
 import { useUserConversations } from "../hooks/useUser";
 import UserCard from "./UserCard";
 import SendMessageForm from "../forms/SendMessageForm";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ShowUserMessages from "./ShowUserMessages";
 
 const UserChats = () => {
@@ -15,7 +15,16 @@ const UserChats = () => {
     user?._id!
   );
 
-  console.log(userConversations);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to bottom on initial render or when messages change
+  useEffect(() => {
+    if (messagesContainerRef.current) {
+      const { scrollHeight, clientHeight } = messagesContainerRef.current;
+      messagesContainerRef.current.scrollTop = scrollHeight - clientHeight;
+    }
+  }, [conversationId]);
+
   if (isLoading) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center">
@@ -30,12 +39,12 @@ const UserChats = () => {
   };
 
   return (
-    <Box display="flex" flex={1}>
+    <Box display="flex" flex={1} height="450px">
       {/* Conversations Sidebar */}
       <Box width="250px" borderRight="1px solid grey">
         {userConversations?.map((conversation) => (
           <UserCard
-            conservation={conversation}
+            conversation={conversation}
             handleSwap={handleChatSwap}
             convId={conversation._id}
             isActive={conversationId === conversation._id}
@@ -47,9 +56,16 @@ const UserChats = () => {
       {receiverId === null || conversationId === null ? (
         <Box> Hello user </Box>
       ) : (
-        <Box display="flex" flexDirection="column" flex={1} justifyContent="space-between">
-          <ShowUserMessages convId={conversationId} />
-          <Box padding="0.5rem">
+        <Box
+          display="flex"
+          flexDirection="column"
+          flex={1}
+          justifyContent="space-between"
+        >
+          <Box overflow="auto" ref={messagesContainerRef}>
+            <ShowUserMessages convId={conversationId} />
+          </Box>
+          <Box padding="0.5rem" >
             <SendMessageForm receiverId={receiverId} />
           </Box>
         </Box>

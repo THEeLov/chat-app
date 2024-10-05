@@ -3,17 +3,17 @@ import useAuthData from "../hooks/useAuthData";
 import { Conversation } from "../types";
 
 const UserCard = ({
-  conservation,
+  conversation,
   handleSwap,
   convId,
   isActive
 }: {
-  conservation: Conversation;
+  conversation: Conversation;
   handleSwap: (recId: string, conId: string) => void;
   convId: string;
   isActive: boolean;
 }) => {
-  const [user1, user2] = conservation.participants;
+  const [user1, user2] = conversation.participants;
   const { user } = useAuthData();
 
   const receiver = user?._id! === user1._id ? user2 : user1;

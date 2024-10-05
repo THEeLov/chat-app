@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query"
 import { getConversationMessages } from "../api/conversationsApi"
 
-export const useConversationAllMessages = (conversationId: string) => {
+export const useConversation = (conversationId: string) => {
   return useQuery({
-    queryKey: ["conversationAllMessages", conversationId],
+    queryKey: ["conversation", conversationId],
     queryFn: () => getConversationMessages(conversationId)
   })
 }
