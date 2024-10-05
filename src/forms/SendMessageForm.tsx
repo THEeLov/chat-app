@@ -8,9 +8,8 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSendMessage } from "../hooks/useMessage";
 
-const SendMessageForm = ({receiverId} : {receiverId: string}) => {
-
-  const {mutateAsync: sendMessage } = useSendMessage(receiverId);
+const SendMessageForm = ({ receiverId }: { receiverId: string }) => {
+  const { mutateAsync: sendMessage } = useSendMessage(receiverId);
 
   const {
     handleSubmit,
@@ -22,13 +21,11 @@ const SendMessageForm = ({receiverId} : {receiverId: string}) => {
   });
 
   const onSubmit = async (data: SendMessageSchemaType) => {
-    
     try {
       await sendMessage(data);
       reset();
-    }
-    catch (error) {
-      alert("Hello")
+    } catch (error) {
+      alert("Hello");
       console.log("Something went wrong");
     }
   };
@@ -36,7 +33,15 @@ const SendMessageForm = ({receiverId} : {receiverId: string}) => {
   return (
     <Paper
       component="form"
-      sx={{ p: "2px 4px", display: "flex", alignItems: "center", backgroundColor: "rgba(255, 255, 255, 0.4)"}}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit(onSubmit)}
+      sx={{
+        p: "2px 4px",
+        display: "flex",
+        alignItems: "center",
+        backgroundColor: "rgba(255, 255, 255, 0.4)",
+      }}
     >
       <InputBase
         sx={{ ml: 1, flex: 1 }}

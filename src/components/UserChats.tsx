@@ -3,7 +3,7 @@ import useAuthData from "../hooks/useAuthData";
 import { useUserConversations } from "../hooks/useUser";
 import UserCard from "./UserCard";
 import SendMessageForm from "../forms/SendMessageForm";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import ShowUserMessages from "./ShowUserMessages";
 
 const UserChats = () => {
@@ -14,16 +14,7 @@ const UserChats = () => {
   const { data: userConversations, isLoading } = useUserConversations(
     user?._id!
   );
-
-  const messagesContainerRef = useRef<HTMLDivElement>(null);
-
-  // Scroll to bottom on initial render or when messages change
-  useEffect(() => {
-    if (messagesContainerRef.current) {
-      const { scrollHeight, clientHeight } = messagesContainerRef.current;
-      messagesContainerRef.current.scrollTop = scrollHeight - clientHeight;
-    }
-  }, [conversationId]);
+  
 
   if (isLoading) {
     return (
@@ -62,7 +53,7 @@ const UserChats = () => {
           flex={1}
           justifyContent="space-between"
         >
-          <Box overflow="auto" ref={messagesContainerRef}>
+          <Box overflow="auto">
             <ShowUserMessages convId={conversationId} />
           </Box>
           <Box padding="0.5rem" >

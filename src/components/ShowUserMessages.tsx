@@ -1,15 +1,23 @@
-import { Avatar, Box, Paper, Typography } from "@mui/material";
+import { Avatar, Box, LinearProgress, Paper, Typography } from "@mui/material";
 import { useConversation } from "../hooks/useConversation";
 import useAuthData from "../hooks/useAuthData";
-import { formatDistanceToNow } from "date-fns";
+import { useEffect, useRef } from "react";
 
 const ShowUserMessages = ({ convId }: { convId: string }) => {
   const { data: usersConversation, isLoading } = useConversation(convId);
 
   const { user } = useAuthData();
 
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView();
+    }
+  }, [usersConversation]);
+
   if (isLoading) {
-    return <Box>Loading...</Box>;
+    return <LinearProgress />;
   }
 
   const [user1, user2] = usersConversation?.participants || [];
@@ -33,21 +41,6 @@ const ShowUserMessages = ({ convId }: { convId: string }) => {
               alignItems="center"
               marginBottom="1rem"
             >
-              {/* Timestamp */}
-              <Typography
-                variant="caption"
-                sx={{
-                  display: "block",
-                  marginTop: "0.5rem",
-                  textAlign: isCurrentUser ? "right" : "left",
-                  color: isCurrentUser ? "#e0e0e0" : "#888",
-                }}
-              >
-                {formatDistanceToNow(new Date(message.createdAt), {
-                  addSuffix: true,
-                })}
-              </Typography>
-              
               {/* Avatar */}
               <Avatar
                 alt={
@@ -68,10 +61,12 @@ const ShowUserMessages = ({ convId }: { convId: string }) => {
 
               {/* Message bubble */}
               <Paper
-                elevation={1}
+                elevation={2}
                 sx={{
                   padding: "0.75rem 1rem",
-                  backgroundColor: isCurrentUser ? "#1976d2" : "#f1f1f1",
+                  backgroundColor: isCurrentUser
+                    ? "#1976d2"
+                    : "rgba(255, 255, 255, 0.6)",
                   color: isCurrentUser ? "#fff" : "#000",
                   borderRadius: "10px",
                   maxWidth: "60%",
@@ -84,6 +79,8 @@ const ShowUserMessages = ({ convId }: { convId: string }) => {
             </Box>
           );
         })}
+
+      <div ref={messagesEndRef} />
     </Box>
   );
 };
