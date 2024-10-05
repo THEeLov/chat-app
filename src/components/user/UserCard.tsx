@@ -6,12 +6,14 @@ const UserCard = ({
   conversation,
   handleSwap,
   convId,
-  isActive
+  isActive,
+  isOnline,
 }: {
   conversation: Conversation;
   handleSwap: (recId: string, conId: string) => void;
   convId: string;
   isActive: boolean;
+  isOnline: boolean;
 }) => {
   const [user1, user2] = conversation.participants;
   const { user } = useAuthData();
@@ -35,8 +37,20 @@ const UserCard = ({
       component="div"
       onClick={() => handleSwap(receiver._id, convId)}
     >
-      <Box>
+      <Box position="relative">
         <Avatar src={receiver.profilePic} />
+        <Box
+          sx={{
+            position: "absolute",
+            right: 0,
+            top: 0,
+            width: "10px",
+            height: "10px",
+            borderRadius: "50%",
+            backgroundColor: isOnline ? "green" : "grey",
+            border: "2px solid white",
+          }}
+        />
       </Box>
       <Box display="flex" alignItems="center">
         <Typography>{receiver.username}</Typography>

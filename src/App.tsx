@@ -5,6 +5,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { SocketContextProvider } from "./contexts/SocketContext";
 
 const queryClient = new QueryClient();
 
@@ -14,7 +15,9 @@ const App = () => {
       <ToastContainer />
       <ThemeProvider theme={theme}>
         {/* <AuthProvider> */}
-        <RouterProvider router={router} />
+        <SocketContextProvider>
+          <RouterProvider router={router} />
+        </SocketContextProvider>
         {/* </AuthProvider> */}
       </ThemeProvider>
     </QueryClientProvider>

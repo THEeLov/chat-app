@@ -5,11 +5,13 @@ import UserCard from "./UserCard";
 import SendMessageForm from "../../forms/SendMessageForm";
 import { useState } from "react";
 import ShowUserMessages from "./ShowUserMessages";
+import { useSocket } from "../../hooks/useSocket";
 
 const UserChats = () => {
   const { user } = useAuthData();
   const [receiverId, setReceiverId] = useState<string | null>(null);
   const [conversationId, setConversationId] = useState<string | null>(null);
+  const { onlineUsers } = useSocket();
 
   const { data: userConversations, isLoading } = useUserConversations(
     user?._id!
@@ -38,6 +40,7 @@ const UserChats = () => {
             handleSwap={handleChatSwap}
             convId={conversation._id}
             isActive={conversationId === conversation._id}
+            isOnline={(conversation.participants[0]._id === user?._id ? onlineUsers?.includes(conversation.participants[1]._id) : onlineUsers?.includes(conversation.participants[0]._id)) || false}
           />
         ))}
       </Box>
