@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Conversation, Message } from "../types";
 import { useSocket } from "./useSocket";
 
-
 export const useListenMessages = (conversation: Conversation | undefined) => {
   const [messages, setMessages] = useState(conversation?.messages || []);
   const { socket } = useSocket();

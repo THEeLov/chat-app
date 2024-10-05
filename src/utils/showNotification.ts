@@ -1,4 +1,4 @@
-import { Bounce, toast } from 'react-toastify';
+import { Bounce, toast } from "react-toastify";
 
 export const showErrorNotification = (message: string) => {
   toast.error(message, {
@@ -8,6 +8,6 @@ export const showErrorNotification = (message: string) => {
     closeOnClick: true,
     draggable: true,
     transition: Bounce,
-    theme: "colored"
+    theme: "colored",
   });
-}
+};

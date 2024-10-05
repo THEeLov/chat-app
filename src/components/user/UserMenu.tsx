@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Menu, MenuItem, IconButton, Avatar } from '@mui/material';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import { useNavigate } from 'react-router-dom';
-import useAuthData from '../../hooks/useAuthData';
+import React, { useState } from "react";
+import { Menu, MenuItem, IconButton, Avatar } from "@mui/material";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import { useNavigate } from "react-router-dom";
+import useAuthData from "../../hooks/useAuthData";
 
 const UserMenu = () => {
   const { user, signOut } = useAuthData();
@@ -20,7 +20,7 @@ const UserMenu = () => {
   const handleSignOut = async () => {
     try {
       signOut();
-      navigate("/signin")
+      navigate("/signin");
     } catch (error) {
       console.error("Failed to sign out:", error);
     }
@@ -38,7 +38,11 @@ const UserMenu = () => {
         color="inherit"
       >
         {user?.profilePic ? (
-          <Avatar src={user.profilePic} alt="User Profile Picture" sx={{ width: 42, height: 42 }} />
+          <Avatar
+            src={user.profilePic}
+            alt="User Profile Picture"
+            sx={{ width: 42, height: 42 }}
+          />
         ) : (
           <AccountCircle />
         )}
@@ -58,7 +62,14 @@ const UserMenu = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => { handleClose(); navigate(`/user/${user!._id}`) }}>PROFILE</MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            navigate(`/user/${user!._id}`);
+          }}
+        >
+          PROFILE
+        </MenuItem>
         <MenuItem onClick={handleSignOut}>SIGN OUT</MenuItem>
       </Menu>
     </>

@@ -1,9 +1,9 @@
 export type SignInData = {
   authToken: string;
   user: User;
-}
+};
 
-export type Token = Omit<SignInData, "user">
+export type Token = Omit<SignInData, "user">;
 
 export type User = {
   _id: string;
@@ -13,7 +13,7 @@ export type User = {
   profilePic: string;
   createdAt: Date;
   updatedAt: Date;
-}
+};
 
 export type Message = {
   _id: string;
@@ -22,7 +22,7 @@ export type Message = {
   message: string;
   createdAt: Date;
   updatedAt: Date;
-}
+};
 
 export type Conversation = {
   _id: string;
@@ -30,4 +30,4 @@ export type Conversation = {
   messages: Message[];
   createdAt: Date;
   updatedAt: Date;
-}
+};

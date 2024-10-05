@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import SignInForm from "../forms/SignInForm";
 import useAuthData from "../hooks/useAuthData";
 import { Navigate } from "react-router-dom";
-import "../styles/glowingBoarded.css"
+import "../styles/glowingBoarded.css";
 
 const SignIn = () => {
   const { user } = useAuthData();

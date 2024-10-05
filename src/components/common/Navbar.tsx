@@ -13,7 +13,7 @@ const Navbar = () => {
       >
         {/* LOGO */}
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <ElectricBoltIcon sx={{color: "#f2e146"}}/>
+          <ElectricBoltIcon sx={{ color: "#f2e146" }} />
           <Typography
             variant="h6"
             noWrap
@@ -24,7 +24,7 @@ const Navbar = () => {
               letterSpacing: ".3rem",
               color: "#f2e045",
               textDecoration: "none",
-              userSelect: "none"
+              userSelect: "none",
             }}
           >
             BOLT

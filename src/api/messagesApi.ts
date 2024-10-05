@@ -18,12 +18,12 @@ axiosInstance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 export const sendMessage = async (
   message: SendMessageSchemaType,
-  receiverId: string
+  receiverId: string,
 ): Promise<Message> => {
   const response = await axiosInstance.post(`/send/${receiverId}`, message);
   return response.data;

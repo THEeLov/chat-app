@@ -18,7 +18,6 @@ const ShowUserMessages = ({ convId }: { convId: string }) => {
     }
   }, [messages]);
 
-  
   if (isLoading) {
     return <LinearProgress />;
   }
@@ -26,11 +25,7 @@ const ShowUserMessages = ({ convId }: { convId: string }) => {
   const [user1, user2] = usersConversation?.participants || [];
 
   return (
-    <Box
-      padding="1rem"
-      overflow="auto"
-      ref={messagesEndRef}
-    >
+    <Box padding="1rem" overflow="auto" ref={messagesEndRef}>
       {usersConversation &&
         messages.map((message) => {
           const isCurrentUser = message.senderId === user?._id;

@@ -10,7 +10,7 @@ const useAuthData = () => {
     AUTH_DATA_STORAGE_KEY,
     {
       defaultValue: AUTH_DATA_DEFAULT,
-    }
+    },
   );
 
   const signIn = (data: SignInData) => {
@@ -21,7 +21,7 @@ const useAuthData = () => {
   const signUp = (data: SignInData) => {
     setUserData(data.user);
     localStorage.setItem("token", data.authToken);
-  }
+  };
 
   const signOut = useCallback(() => {
     setUserData(AUTH_DATA_DEFAULT);

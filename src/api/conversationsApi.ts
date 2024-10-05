@@ -17,17 +17,19 @@ axiosInstance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 export const getUserConversations = async (
-  userId: string
+  userId: string,
 ): Promise<Conversation[]> => {
   const resp = await axiosInstance.get(`/${userId}`);
   return resp.data;
 };
 
-export const getConversationMessages = async (conversationId: string): Promise<Conversation> => {
+export const getConversationMessages = async (
+  conversationId: string,
+): Promise<Conversation> => {
   const resp = await axiosInstance.get(`/messages/${conversationId}`);
   return resp.data;
-}
+};

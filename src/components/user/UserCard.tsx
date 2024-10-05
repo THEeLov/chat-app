@@ -48,7 +48,7 @@ const UserCard = ({
             height: "10px",
             borderRadius: "50%",
             backgroundColor: isOnline ? "#33CC00" : "#888888",
-            border: "2px solid transparent"
+            border: "2px solid transparent",
           }}
         />
       </Box>

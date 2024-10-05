@@ -8,7 +8,7 @@ export interface SocketContextType {
 }
 
 export const SocketContext = createContext<SocketContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const SocketContextProvider: React.FC<{ children: React.ReactNode }> = ({

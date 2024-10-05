@@ -14,7 +14,7 @@ const UserChats = () => {
   const { onlineUsers } = useSocket();
 
   const { data: userConversations, isLoading } = useUserConversations(
-    user?._id!
+    user?._id!,
   );
 
   if (isLoading) {
