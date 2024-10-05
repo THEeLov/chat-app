@@ -1,4 +1,4 @@
-import { Box, CircularProgress } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import useAuthData from "../hooks/useAuthData";
 import { useUserConversations } from "../hooks/useUser";
 import UserCard from "./UserCard";
@@ -14,7 +14,6 @@ const UserChats = () => {
   const { data: userConversations, isLoading } = useUserConversations(
     user?._id!
   );
-  
 
   if (isLoading) {
     return (
@@ -45,7 +44,16 @@ const UserChats = () => {
 
       {/* Chat Window */}
       {receiverId === null || conversationId === null ? (
-        <Box> Hello user </Box>
+        <Typography
+          display="flex"
+          flex={1}
+          justifyContent="center"
+          alignItems="center"
+          component="h2"
+          variant="h4"
+        >
+          Hi&nbsp;<b>{user?.username} 👋</b>{" "}
+        </Typography>
       ) : (
         <Box
           display="flex"
@@ -56,7 +64,7 @@ const UserChats = () => {
           <Box overflow="auto">
             <ShowUserMessages convId={conversationId} />
           </Box>
-          <Box padding="0.5rem" >
+          <Box padding="0.5rem">
             <SendMessageForm receiverId={receiverId} />
           </Box>
         </Box>
