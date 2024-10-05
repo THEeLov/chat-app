@@ -1,7 +1,7 @@
 import { AppBar, Box, Toolbar, Typography } from "@mui/material";
-import useAuthData from "../hooks/useAuthData";
+import useAuthData from "../../hooks/useAuthData";
 import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
-import UserMenu from "./UserMenu";
+import UserMenu from "../user/UserMenu";
 
 const Navbar = () => {
   const { user } = useAuthData();

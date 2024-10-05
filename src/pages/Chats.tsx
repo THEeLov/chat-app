@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import UserChats from "../components/UserChats";
+import Navbar from "../components/common/Navbar";
+import Footer from "../components/common/Footer";
+import UserChats from "../components/user/UserChats";
 
 const Chats = () => {
   return (

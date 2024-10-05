@@ -1,6 +1,6 @@
 import { Avatar, Box, Typography } from "@mui/material";
-import useAuthData from "../hooks/useAuthData";
-import { Conversation } from "../types";
+import useAuthData from "../../hooks/useAuthData";
+import { Conversation } from "../../types";
 
 const UserCard = ({
   conversation,

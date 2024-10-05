@@ -1,8 +1,8 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
-import useAuthData from "../hooks/useAuthData";
-import { useUserConversations } from "../hooks/useUser";
+import useAuthData from "../../hooks/useAuthData";
+import { useUserConversations } from "../../hooks/useUser";
 import UserCard from "./UserCard";
-import SendMessageForm from "../forms/SendMessageForm";
+import SendMessageForm from "../../forms/SendMessageForm";
 import { useState } from "react";
 import ShowUserMessages from "./ShowUserMessages";
 

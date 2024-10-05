@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Menu, MenuItem, IconButton, Avatar } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
-import useAuthData from '../hooks/useAuthData';
+import useAuthData from '../../hooks/useAuthData';
 
 const UserMenu = () => {
   const { user, signOut } = useAuthData();
