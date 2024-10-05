@@ -1,10 +1,12 @@
 import { Avatar, Box, LinearProgress, Paper, Typography } from "@mui/material";
 import { useConversation } from "../../hooks/useConversation";
 import useAuthData from "../../hooks/useAuthData";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useListenMessages } from "../../hooks/useListenMessages";
 
 const ShowUserMessages = ({ convId }: { convId: string }) => {
   const { data: usersConversation, isLoading } = useConversation(convId);
+  const { messages } = useListenMessages(usersConversation);
 
   const { user } = useAuthData();
 
@@ -31,7 +33,7 @@ const ShowUserMessages = ({ convId }: { convId: string }) => {
       padding="1rem"
     >
       {usersConversation &&
-        usersConversation.messages.map((message) => {
+        messages.map((message) => {
           const isCurrentUser = message.senderId === user?._id;
           return (
             <Box

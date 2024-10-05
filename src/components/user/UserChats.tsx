@@ -40,7 +40,12 @@ const UserChats = () => {
             handleSwap={handleChatSwap}
             convId={conversation._id}
             isActive={conversationId === conversation._id}
-            isOnline={(conversation.participants[0]._id === user?._id ? onlineUsers?.includes(conversation.participants[1]._id) : onlineUsers?.includes(conversation.participants[0]._id)) || false}
+            isOnline={
+              (conversation.participants[0]._id === user?._id
+                ? onlineUsers?.includes(conversation.participants[1]._id)
+                : onlineUsers?.includes(conversation.participants[0]._id)) ||
+              false
+            }
           />
         ))}
       </Box>
