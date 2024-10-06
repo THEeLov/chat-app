@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSignIn } from "../hooks/useAuth";
 import useAuthData from "../hooks/useAuthData";
 import { isAxiosError } from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignInForm = () => {
   const { mutateAsync: signInUser } = useSignIn();
@@ -89,7 +89,7 @@ const SignInForm = () => {
 
       <Typography>
         Don't have an account ?{" "}
-        <Typography component="a" href="/signup" color="black">
+        <Typography component={Link} to="/signup" color="black">
           Sign Up
         </Typography>
       </Typography>
