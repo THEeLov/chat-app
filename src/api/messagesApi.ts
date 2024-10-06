@@ -3,7 +3,7 @@ import { SendMessageSchemaType } from "../validationSchemas/forms";
 import { Message } from "../types";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000/api/messages",
+  baseURL: "https://chat-app-backend-q3h4.onrender.com/api/messages",
 });
 
 axiosInstance.interceptors.request.use(

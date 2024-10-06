@@ -14,11 +14,9 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <ToastContainer />
       <ThemeProvider theme={theme}>
-        {/* <AuthProvider> */}
         <SocketContextProvider>
           <RouterProvider router={router} />
         </SocketContextProvider>
-        {/* </AuthProvider> */}
       </ThemeProvider>
     </QueryClientProvider>
   );
