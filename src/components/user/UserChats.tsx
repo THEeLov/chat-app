@@ -7,6 +7,7 @@ import { useState } from "react";
 import ShowUserMessages from "./ShowUserMessages";
 import { useSocket } from "../../hooks/useSocket";
 import SearchUserForm from "../../forms/SearchUserForm";
+import { useListenConversations } from "../../hooks/useListenOnSocket";
 
 const UserChats = () => {
   const { user } = useAuthData();
@@ -14,9 +15,12 @@ const UserChats = () => {
   const [conversationId, setConversationId] = useState<string | null>(null);
   const { onlineUsers } = useSocket();
 
-  const { data: userConversations, isLoading } = useUserConversations(
+  const { data: initialConversations, isLoading } = useUserConversations(
     user?._id!,
   );
+
+  console.log(initialConversations);
+  const { conversations: userConversations } = useListenConversations(initialConversations);
 
   if (isLoading) {
     return (

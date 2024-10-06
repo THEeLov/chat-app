@@ -1,7 +1,7 @@
 import { Avatar, Box, LinearProgress, Paper, Typography } from "@mui/material";
 import { useConversation } from "../../hooks/useConversation";
 import useAuthData from "../../hooks/useAuthData";
-import { useListenMessages } from "../../hooks/useListenMessages";
+import { useListenMessages } from "../../hooks/useListenOnSocket";
 import { useEffect, useRef } from "react";
 
 const ShowUserMessages = ({ convId }: { convId: string }) => {

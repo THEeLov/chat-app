@@ -31,3 +31,8 @@ export type Conversation = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type ConversationCreate = {
+  senderId: string;
+  receiverId: string;
+}

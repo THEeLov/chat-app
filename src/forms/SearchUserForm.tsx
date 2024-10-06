@@ -1,7 +1,6 @@
 import {
   Avatar,
   Box,
-  Divider,
   IconButton,
   InputAdornment,
   List,
@@ -17,6 +16,14 @@ import { User } from "../types";
 import { useUsersSearch } from "../hooks/useUser";
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
+import useAuthData from "../hooks/useAuthData";
+import { useConversationCreate } from "../hooks/useConversation";
+import {
+  showErrorNotification,
+  showSuccessNotification,
+  showWarningNotification,
+} from "../utils/showNotification";
+import { isAxiosError } from "axios";
 
 const SearchUserForm = () => {
   const { watch, register } = useForm<FindUserSchemaType>({
@@ -24,15 +31,42 @@ const SearchUserForm = () => {
   });
 
   const [isFocused, setIsFocused] = useState(false);
+  const { user } = useAuthData();
+
   const currentEmail = watch("email");
 
   const { data: userList } = useUsersSearch(
     isFocused && currentEmail !== undefined ? currentEmail : undefined
   );
 
-  function handleAddUser(_id: string): void {
-    console.log("add me bro");
-  }
+  const { mutateAsync: createConversation } = useConversationCreate();
+
+  const handleAddUser = async (senderId: string, receiverId: string) => {
+    try {
+      const data = {
+        senderId,
+        receiverId,
+      };
+      await createConversation(data);
+      showSuccessNotification("Conversation successfully created.");
+    } catch (error) {
+      if (isAxiosError(error)) {
+        const statusCode = error.response?.status;
+        if (statusCode === 409) {
+          showWarningNotification("Conversation already established.");
+        }
+        else {
+          showErrorNotification("Opps something went wrong.")
+        }
+      }
+    }
+  };
+
+  const handleBlur = () => {
+    setTimeout(() => {
+      setIsFocused(false);
+    }, 100);
+  };
 
   return (
     <Box>
@@ -51,39 +85,42 @@ const SearchUserForm = () => {
         variant="filled"
         {...register("email")}
         onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        onBlur={handleBlur}
       />
-
 
       {/* This need to refactor to seperate component  */}
       {userList && userList.length > 0 && (
         <List>
-          {userList.map((user: User) => (
-            <ListItem key={user._id}>
+          {userList.map((optionUser: User) =>
+            optionUser._id === user!._id ? null : (
+              <ListItem key={optionUser._id}>
+                {/* User avatar and info */}
+                <Box display="flex" justifyContent="space-between" width="100%">
+                  <Box display="flex" alignItems="center" overflow="hidden">
+                    <Avatar
+                      alt={optionUser.username}
+                      src={optionUser.profilePic}
+                    />{" "}
+                    <ListItemText
+                      primary={optionUser.username}
+                      secondary={optionUser.email}
+                      sx={{ ml: 1 }}
+                    />
+                  </Box>
 
-              {/* User avatar and info */}
-              <Box display="flex" justifyContent="space-between" width="100%">
-                <Box display="flex" alignItems="center" overflow="hidden">
-                  <Avatar alt={user.username} src={user.profilePic} />{" "}
-                  <ListItemText
-                    primary={user.username}
-                    secondary={user.email}
-                    sx={{ ml: 1 }}
-                  />
+                  {/* User add button */}
+                  <Box display="flex" alignItems="center">
+                    <IconButton
+                      onClick={() => handleAddUser(user!._id, optionUser._id)}
+                      color="primary"
+                    >
+                      <AddIcon />
+                    </IconButton>
+                  </Box>
                 </Box>
-
-                {/* User add button */}
-                <Box display="flex" alignItems="center">
-                  <IconButton
-                    onClick={() => handleAddUser(user._id)}
-                    color="primary"
-                  >
-                    <AddIcon />
-                  </IconButton>
-                </Box>
-              </Box>
-            </ListItem>
-          ))}
+              </ListItem>
+            )
+          )}
         </List>
       )}
     </Box>

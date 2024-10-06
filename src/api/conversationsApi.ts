@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Conversation, Message } from "../types";
+import { Conversation, ConversationCreate } from "../types";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3000/api/conversations",
@@ -33,3 +33,8 @@ export const getConversationMessages = async (
   const resp = await axiosInstance.get(`/messages/${conversationId}`);
   return resp.data;
 };
+
+export const postConversation = async (data: ConversationCreate): Promise<Conversation> => {
+  const resp = await axiosInstance.post("", data);
+  return resp.data;
+}
