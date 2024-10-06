@@ -6,6 +6,7 @@ import SendMessageForm from "../../forms/SendMessageForm";
 import { useState } from "react";
 import ShowUserMessages from "./ShowUserMessages";
 import { useSocket } from "../../hooks/useSocket";
+import SearchUserForm from "../../forms/SearchUserForm";
 
 const UserChats = () => {
   const { user } = useAuthData();
@@ -34,6 +35,7 @@ const UserChats = () => {
     <Box display="flex" flex={1} height="450px">
       {/* Conversations Sidebar */}
       <Box width="250px" borderRight="1px solid grey">
+        <SearchUserForm />
         {userConversations?.map((conversation) => (
           <UserCard
             conversation={conversation}

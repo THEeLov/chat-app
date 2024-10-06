@@ -25,3 +25,9 @@ export const sendMessageSchema = z.object({
 });
 
 export type SendMessageSchemaType = z.infer<typeof sendMessageSchema>;
+
+export const findUserSchema = z.object({
+  email: z.string().email(),
+});
+
+export type FindUserSchemaType = z.infer<typeof findUserSchema>
