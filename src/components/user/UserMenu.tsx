@@ -62,14 +62,6 @@ const UserMenu = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem
-          onClick={() => {
-            handleClose();
-            navigate(`/user/${user!._id}`);
-          }}
-        >
-          PROFILE
-        </MenuItem>
         <MenuItem onClick={handleSignOut}>SIGN OUT</MenuItem>
       </Menu>
     </>
