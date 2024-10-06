@@ -35,4 +35,4 @@ export type Conversation = {
 export type ConversationCreate = {
   senderId: string;
   receiverId: string;
-}
+};

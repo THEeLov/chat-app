@@ -5,7 +5,6 @@ const axiosInstance = axios.create({
   baseURL: "http://localhost:3000/api/users",
 });
 
-
 export const getUsers = async (data: string | undefined): Promise<User[]> => {
   if (data === undefined) {
     return [];

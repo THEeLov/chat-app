@@ -36,7 +36,7 @@ const SearchUserForm = () => {
   const currentEmail = watch("email");
 
   const { data: userList } = useUsersSearch(
-    isFocused && currentEmail !== undefined ? currentEmail : undefined
+    isFocused && currentEmail !== undefined ? currentEmail : undefined,
   );
 
   const { mutateAsync: createConversation } = useConversationCreate();
@@ -54,9 +54,8 @@ const SearchUserForm = () => {
         const statusCode = error.response?.status;
         if (statusCode === 409) {
           showWarningNotification("Conversation already established.");
-        }
-        else {
-          showErrorNotification("Opps something went wrong.")
+        } else {
+          showErrorNotification("Opps something went wrong.");
         }
       }
     }
@@ -119,7 +118,7 @@ const SearchUserForm = () => {
                   </Box>
                 </Box>
               </ListItem>
-            )
+            ),
           )}
         </List>
       )}

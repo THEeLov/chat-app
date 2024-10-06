@@ -1,5 +1,8 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { getConversationMessages, postConversation } from "../api/conversationsApi";
+import {
+  getConversationMessages,
+  postConversation,
+} from "../api/conversationsApi";
 import { ConversationCreate } from "../types";
 
 export const useConversation = (conversationId: string) => {
@@ -11,6 +14,6 @@ export const useConversation = (conversationId: string) => {
 
 export const useConversationCreate = () => {
   return useMutation({
-    mutationFn: (data: ConversationCreate) => postConversation(data) 
-  })
-}
+    mutationFn: (data: ConversationCreate) => postConversation(data),
+  });
+};

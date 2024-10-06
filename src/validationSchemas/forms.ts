@@ -30,4 +30,4 @@ export const findUserSchema = z.object({
   email: z.string().email(),
 });
 
-export type FindUserSchemaType = z.infer<typeof findUserSchema>
+export type FindUserSchemaType = z.infer<typeof findUserSchema>;

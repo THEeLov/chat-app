@@ -34,7 +34,9 @@ export const getConversationMessages = async (
   return resp.data;
 };
 
-export const postConversation = async (data: ConversationCreate): Promise<Conversation> => {
+export const postConversation = async (
+  data: ConversationCreate,
+): Promise<Conversation> => {
   const resp = await axiosInstance.post("", data);
   return resp.data;
-}
+};

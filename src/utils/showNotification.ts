@@ -22,7 +22,7 @@ export const showSuccessNotification = (message: string) => {
     transition: Bounce,
     theme: "colored",
   });
-}
+};
 
 export const showWarningNotification = (message: string) => {
   toast.warning(message, {
@@ -34,4 +34,4 @@ export const showWarningNotification = (message: string) => {
     transition: Bounce,
     theme: "colored",
   });
-}
+};

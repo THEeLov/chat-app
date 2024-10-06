@@ -20,7 +20,8 @@ const UserChats = () => {
   );
 
   console.log(initialConversations);
-  const { conversations: userConversations } = useListenConversations(initialConversations);
+  const { conversations: userConversations } =
+    useListenConversations(initialConversations);
 
   if (isLoading) {
     return (
@@ -40,20 +41,27 @@ const UserChats = () => {
       {/* Conversations Sidebar */}
       <Box width="250px" borderRight="1px solid grey">
         <SearchUserForm />
-        {userConversations?.map((conversation) => (
-          <UserCard
-            conversation={conversation}
-            handleSwap={handleChatSwap}
-            convId={conversation._id}
-            isActive={conversationId === conversation._id}
-            isOnline={
-              (conversation.participants[0]._id === user?._id
-                ? onlineUsers?.includes(conversation.participants[1]._id)
-                : onlineUsers?.includes(conversation.participants[0]._id)) ||
-              false
-            }
-          />
-        ))}
+        {userConversations && userConversations.length > 0 ? (
+          userConversations.map((conversation) => (
+            <UserCard
+              key={conversation._id} // Add a key prop for mapping
+              conversation={conversation}
+              handleSwap={handleChatSwap}
+              convId={conversation._id}
+              isActive={conversationId === conversation._id}
+              isOnline={
+                (conversation.participants[0]._id === user?._id
+                  ? onlineUsers?.includes(conversation.participants[1]._id)
+                  : onlineUsers?.includes(conversation.participants[0]._id)) ||
+                false
+              }
+            />
+          ))
+        ) : (
+          <Typography variant="body2" padding="1rem">
+            No conversations yet
+          </Typography>
+        )}
       </Box>
 
       {/* Chat Window */}

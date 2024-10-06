@@ -31,7 +31,9 @@ export const useListenMessages = (conversation: Conversation | undefined) => {
 };
 
 export const useListenConversations = (conv: Conversation[] | undefined) => {
-  const [conversations, setConversations] = useState<Conversation[]>(conv || []);
+  const [conversations, setConversations] = useState<Conversation[]>(
+    conv || [],
+  );
   const { socket } = useSocket();
 
   useEffect(() => {
@@ -45,7 +47,10 @@ export const useListenConversations = (conv: Conversation[] | undefined) => {
       // Listen for new conversations from the socket
       socket.on("newContact", (newConversation: Conversation) => {
         // Add new conversation to the existing ones
-        setConversations((prevConversations) => [...prevConversations, newConversation]);
+        setConversations((prevConversations) => [
+          ...prevConversations,
+          newConversation,
+        ]);
       });
 
       // Cleanup socket listener on unmount
@@ -57,4 +62,3 @@ export const useListenConversations = (conv: Conversation[] | undefined) => {
 
   return { conversations };
 };
-

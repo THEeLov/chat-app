@@ -13,6 +13,6 @@ export const useUserConversations = (userId: string) => {
 export const useUsersSearch = (email: string | undefined) => {
   return useQuery({
     queryKey: ["users", email],
-    queryFn: () => getUsers(email)
-  })
-}
+    queryFn: () => getUsers(email),
+  });
+};

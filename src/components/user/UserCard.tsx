@@ -19,7 +19,7 @@ const UserCard = ({
   const { user } = useAuthData();
 
   const receiver = user?._id! === user1._id ? user2 : user1;
-  
+
   // console.log(conversation);
   return (
     <Box
