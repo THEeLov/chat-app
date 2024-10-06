@@ -20,7 +20,7 @@ export const SocketContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     if (user) {
-      const socketInstance = io("http://localhost:3000", {
+      const socketInstance = io("https://chat-app-backend-q3h4.onrender.com", {
         query: { userId: user._id },
       });
 
