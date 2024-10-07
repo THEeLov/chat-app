@@ -4,6 +4,7 @@ This is the frontend of the real-time chat application, built using **React**. I
 
 ## 🌐 Live Demo
 
+This apps backend is deployed on **Render**. Please note that when the app has been inactive for a while, backend enters **sleep mode**. This means the apps backend might take a few extra seconds/minutes to start when you attempt to do some request (like login/register).
 Check out the live version of the project here: [BOLT CHAT](https://bolt-krl3.onrender.com)
 
 ## 🚀 Features
