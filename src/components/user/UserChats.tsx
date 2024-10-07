@@ -39,7 +39,7 @@ const UserChats = () => {
   return (
     <Box display="flex" flex={1} height="450px">
       {/* Conversations Sidebar */}
-      <Box width="250px" borderRight="1px solid grey">
+      <Box width="250px" borderRight="1px solid grey" overflow="auto">
         <SearchUserForm />
         {userConversations && userConversations.length > 0 ? (
           userConversations.map((conversation) => (
