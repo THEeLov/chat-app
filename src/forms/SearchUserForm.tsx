@@ -60,6 +60,7 @@ const SearchUserForm = () => {
         }
       }
     }
+    setIsFocused(false);
   };
 
 
