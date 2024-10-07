@@ -24,6 +24,7 @@ import {
   showWarningNotification,
 } from "../utils/showNotification";
 import { isAxiosError } from "axios";
+import ClearIcon from '@mui/icons-material/Clear';
 
 const SearchUserForm = () => {
   const { watch, register } = useForm<FindUserSchemaType>({
@@ -36,7 +37,7 @@ const SearchUserForm = () => {
   const currentEmail = watch("email");
 
   const { data: userList } = useUsersSearch(
-    isFocused && currentEmail !== undefined ? currentEmail : undefined,
+    isFocused && currentEmail !== undefined ? currentEmail : undefined
   );
 
   const { mutateAsync: createConversation } = useConversationCreate();
@@ -61,11 +62,6 @@ const SearchUserForm = () => {
     }
   };
 
-  const handleBlur = () => {
-    setTimeout(() => {
-      setIsFocused(false);
-    }, 100);
-  };
 
   return (
     <Box>
@@ -79,12 +75,20 @@ const SearchUserForm = () => {
                 <SearchIcon />
               </InputAdornment>
             ),
+            endAdornment: (
+              isFocused ? (
+                <InputAdornment position="end">
+                  <IconButton onClick={() => setIsFocused(false)}>
+                    <ClearIcon />
+                  </IconButton>
+                </InputAdornment>
+              ) : null
+            ),
           },
         }}
         variant="filled"
         {...register("email")}
         onFocus={() => setIsFocused(true)}
-        onBlur={handleBlur}
       />
 
       {/* This need to refactor to seperate component  */}
@@ -118,7 +122,7 @@ const SearchUserForm = () => {
                   </Box>
                 </Box>
               </ListItem>
-            ),
+            )
           )}
         </List>
       )}
