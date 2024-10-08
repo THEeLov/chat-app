@@ -1,4 +1,11 @@
-import { Box, CircularProgress, Typography } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Drawer,
+  IconButton,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import useAuthData from "../../hooks/useAuthData";
 import { useUserConversations } from "../../hooks/useUser";
 import UserCard from "./UserCard";
@@ -8,18 +15,21 @@ import ShowUserMessages from "./ShowUserMessages";
 import { useSocket } from "../../hooks/useSocket";
 import SearchUserForm from "../../forms/SearchUserForm";
 import { useListenConversations } from "../../hooks/useListenOnSocket";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 
 const UserChats = () => {
   const { user } = useAuthData();
   const [receiverId, setReceiverId] = useState<string | null>(null);
   const [conversationId, setConversationId] = useState<string | null>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const isMobile = useMediaQuery("(max-width:700px)");
+
   const { onlineUsers } = useSocket();
 
   const { data: initialConversations, isLoading } = useUserConversations(
-    user?._id!,
+    user?._id!
   );
 
-  console.log(initialConversations);
   const { conversations: userConversations } =
     useListenConversations(initialConversations);
 
@@ -36,33 +46,98 @@ const UserChats = () => {
     setConversationId(convId);
   };
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <Box display="flex" flex={1} height="450px">
-      {/* Conversations Sidebar */}
-      <Box width="250px" borderRight="1px solid grey" overflow="auto">
-        <SearchUserForm />
-        {userConversations && userConversations.length > 0 ? (
-          userConversations.map((conversation) => (
-            <UserCard
-              key={conversation._id} // Add a key prop for mapping
-              conversation={conversation}
-              handleSwap={handleChatSwap}
-              convId={conversation._id}
-              isActive={conversationId === conversation._id}
-              isOnline={
-                (conversation.participants[0]._id === user?._id
-                  ? onlineUsers?.includes(conversation.participants[1]._id)
-                  : onlineUsers?.includes(conversation.participants[0]._id)) ||
-                false
-              }
-            />
-          ))
-        ) : (
-          <Typography variant="body2" padding="1rem">
-            No conversations yet
-          </Typography>
-        )}
-      </Box>
+      {/* Conversations Sidebar (Mobile-friendly with Drawer) */}
+      {isMobile ? (
+        <Box>
+          {/* Button to open the sidebar on mobile */}
+          <IconButton
+            onClick={toggleSidebar}
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{
+              position: "absolute",
+              left: "20px",
+              backgroundColor: "#1976d2",
+              marginTop: "10px",
+              zIndex: "1",
+            }}
+            size="large"
+          >
+            <QuestionAnswerIcon sx={{ color: "white" }} />
+          </IconButton>
+
+          <Drawer
+            anchor="left"
+            open={isSidebarOpen}
+            onClose={toggleSidebar}
+            sx={{ width: "100%", flexShrink: 0 }}
+            PaperProps={{
+              style: { width: "250px" },
+            }}
+          >
+            <Box width="250px" borderRight="1px solid grey" overflow="auto">
+              <SearchUserForm />
+              {userConversations && userConversations.length > 0 ? (
+                userConversations.map((conversation) => (
+                  <UserCard
+                    key={conversation._id}
+                    conversation={conversation}
+                    handleSwap={handleChatSwap}
+                    convId={conversation._id}
+                    isActive={conversationId === conversation._id}
+                    isOnline={
+                      (conversation.participants[0]._id === user?._id
+                        ? onlineUsers?.includes(
+                            conversation.participants[1]._id
+                          )
+                        : onlineUsers?.includes(
+                            conversation.participants[0]._id
+                          )) || false
+                    }
+                  />
+                ))
+              ) : (
+                <Typography variant="body2" padding="1rem">
+                  No conversations yet
+                </Typography>
+              )}
+            </Box>
+          </Drawer>
+        </Box>
+      ) : (
+        <Box width="250px" borderRight="1px solid grey" overflow="auto">
+          <SearchUserForm />
+          {userConversations && userConversations.length > 0 ? (
+            userConversations.map((conversation) => (
+              <UserCard
+                key={conversation._id}
+                conversation={conversation}
+                handleSwap={handleChatSwap}
+                convId={conversation._id}
+                isActive={conversationId === conversation._id}
+                isOnline={
+                  (conversation.participants[0]._id === user?._id
+                    ? onlineUsers?.includes(conversation.participants[1]._id)
+                    : onlineUsers?.includes(
+                        conversation.participants[0]._id
+                      )) || false
+                }
+              />
+            ))
+          ) : (
+            <Typography variant="body2" padding="1rem">
+              No conversations yet
+            </Typography>
+          )}
+        </Box>
+      )}
 
       {/* Chat Window */}
       {receiverId === null || conversationId === null ? (
@@ -73,8 +148,15 @@ const UserChats = () => {
           alignItems="center"
           component="h2"
           variant="h4"
+          flexDirection="column"
+          gap="1rem"
         >
-          Hi&nbsp;<b>{user?.username} 👋</b>{" "}
+          <Box>
+            Hi&nbsp;<b>{user?.username} 👋</b>
+          </Box>
+          <Typography variant="body2" component="h3">
+            Select conversation to start chatting
+          </Typography>{" "}
         </Typography>
       ) : (
         <Box
