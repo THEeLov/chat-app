@@ -82,6 +82,7 @@ const UserChats = () => {
               style: { width: "250px" },
             }}
           >
+            {/* This will be refactored to component  */}
             <Box width="250px" borderRight="1px solid grey" overflow="auto">
               <SearchUserForm />
               {userConversations && userConversations.length > 0 ? (
