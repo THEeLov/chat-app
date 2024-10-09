@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import ConversationsSidebar from "./ ConversationsSidebar";
-import UserMessagesWindow from "./UserMessagesWindow";
+import UserMessagesWindow from "./MessagesWindow";
 
 const ChattingWindow = () => {
 

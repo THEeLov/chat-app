@@ -1,7 +1,7 @@
 import { Box, Drawer, IconButton, useMediaQuery } from "@mui/material";
 import { useState } from "react";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
-import UserConversations from "./UserConversations";
+import UserConversations from "../user/UserConversations";
 
 const ConversationsSidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

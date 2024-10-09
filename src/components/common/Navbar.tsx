@@ -1,11 +1,8 @@
 import { AppBar, Box, Toolbar, Typography } from "@mui/material";
-import useAuthData from "../../hooks/useAuthData";
 import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
-import UserMenu from "../user/UserMenu";
+import NavbarAvatar from "./NavbarAvatar";
 
 const Navbar = () => {
-  const { user } = useAuthData();
-
   return (
     <AppBar position="sticky">
       <Toolbar
@@ -31,9 +28,9 @@ const Navbar = () => {
           </Typography>
         </Box>
 
-        {/* ACCOUNT */}
+        {/* Avatar */}
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          {user && <UserMenu />}
+          <NavbarAvatar />
         </Box>
       </Toolbar>
     </AppBar>

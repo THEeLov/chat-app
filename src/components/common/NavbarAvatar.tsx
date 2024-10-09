@@ -4,7 +4,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 import useAuthData from "../../hooks/useAuthData";
 
-const UserMenu = () => {
+const NavbarAvatar = () => {
   const { user, signOut } = useAuthData();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -68,4 +68,4 @@ const UserMenu = () => {
   );
 };
 
-export default UserMenu;
+export default NavbarAvatar;
