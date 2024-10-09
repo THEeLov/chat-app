@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 import useAuthData from "../hooks/useAuthData";
+import { ConversationContextProvider } from "../contexts/ConversationContext";
 
 const ProtectedRouteLayout = () => {
   const { user } = useAuthData();
@@ -9,7 +10,11 @@ const ProtectedRouteLayout = () => {
     return <Navigate to="/signin" />;
   }
 
-  return <Outlet />;
+  return (
+    <ConversationContextProvider>
+      <Outlet />
+    </ConversationContextProvider>
+  );
 };
 
 export default ProtectedRouteLayout;

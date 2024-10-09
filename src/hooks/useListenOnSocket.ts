@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Conversation, Message } from "../types";
-import { useSocket } from "./useSocket";
+import { useSocketContext } from "./contexts/useSocket";
 
 export const useListenMessages = (conversation: Conversation | undefined) => {
   const [messages, setMessages] = useState(conversation?.messages || []);
-  const { socket } = useSocket();
+  const { socket } = useSocketContext();
 
   // Update messages when conversation changes
   useEffect(() => {
@@ -34,7 +34,7 @@ export const useListenConversations = (conv: Conversation[] | undefined) => {
   const [conversations, setConversations] = useState<Conversation[]>(
     conv || [],
   );
-  const { socket } = useSocket();
+  const { socket } = useSocketContext();
 
   useEffect(() => {
     if (conv) {

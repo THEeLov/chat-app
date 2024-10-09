@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
-import UserChats from "../components/user/UserChats";
+import ChattingWindow from "../components/user/ChattingWindow";
 
 const Chats = () => {
   return (
@@ -19,7 +19,7 @@ const Chats = () => {
     >
       <Navbar />
       <Box>
-        <UserChats />
+        <ChattingWindow />
       </Box>
       <Footer />
     </Box>

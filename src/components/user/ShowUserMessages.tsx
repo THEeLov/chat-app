@@ -3,12 +3,16 @@ import { useConversation } from "../../hooks/useConversation";
 import useAuthData from "../../hooks/useAuthData";
 import { useListenMessages } from "../../hooks/useListenOnSocket";
 import { useEffect, useRef } from "react";
+import { useConverstationContext } from "../../hooks/contexts/useConversationContext";
 
-const ShowUserMessages = ({ convId }: { convId: string }) => {
-  const { data: usersConversation, isLoading } = useConversation(convId);
-  const { messages } = useListenMessages(usersConversation);
-
+const ShowUserMessages = () => {
   const { user } = useAuthData();
+
+  const { openConversationId } = useConverstationContext();
+  const { data: usersConversation, isLoading } = useConversation(
+    openConversationId!
+  );
+  const { messages } = useListenMessages(usersConversation);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 

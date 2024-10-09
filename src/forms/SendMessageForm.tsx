@@ -7,9 +7,12 @@ import {
 } from "../validationSchemas/forms";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSendMessage } from "../hooks/useMessage";
+import { useConverstationContext } from "../hooks/contexts/useConversationContext";
 
-const SendMessageForm = ({ receiverId }: { receiverId: string }) => {
-  const { mutateAsync: sendMessage } = useSendMessage(receiverId);
+const SendMessageForm = () => {
+  const { receiverId } = useConverstationContext();
+
+  const { mutateAsync: sendMessage } = useSendMessage(receiverId!);
 
   const {
     handleSubmit,

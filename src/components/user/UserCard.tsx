@@ -1,26 +1,22 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import useAuthData from "../../hooks/useAuthData";
 import { Conversation } from "../../types";
+import { useConverstationContext } from "../../hooks/contexts/useConversationContext";
 
 const UserCard = ({
   conversation,
-  handleSwap,
-  convId,
-  isActive,
   isOnline,
 }: {
   conversation: Conversation;
-  handleSwap: (recId: string, conId: string) => void;
-  convId: string;
-  isActive: boolean;
   isOnline: boolean;
 }) => {
-  const [user1, user2] = conversation.participants;
-  const { user } = useAuthData();
 
+  const { user } = useAuthData();
+  const { openConversationId, handleChatSwap } = useConverstationContext();
+
+  const [user1, user2] = conversation.participants;
   const receiver = user?._id! === user1._id ? user2 : user1;
 
-  // console.log(conversation);
   return (
     <Box
       display="flex"
@@ -29,14 +25,14 @@ const UserCard = ({
       gap="1rem"
       sx={{
         transition: "background 0.2s ease-in-out",
-        background: isActive ? "rgba(255,255,255,0.2)" : "transparent",
+        background: openConversationId === conversation._id ? "rgba(255,255,255,0.2)" : "transparent",
         "&:hover": {
           cursor: "pointer",
           background: "rgba(255,255,255,0.2)",
         },
       }}
       component="div"
-      onClick={() => handleSwap(receiver._id, convId)}
+      onClick={() => handleChatSwap(conversation._id, receiver._id, )}
     >
       <Box position="relative">
         <Avatar src={receiver.profilePic} />
