@@ -34,7 +34,7 @@ const SignUpForm = () => {
           message:
             statusCode === 409
               ? "Email is already taken"
-              : "Internal server error",
+              : "Server is probably down try again later",
         });
       }
     }

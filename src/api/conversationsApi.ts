@@ -1,24 +1,12 @@
 import axios from "axios";
 import { Conversation, ConversationCreate } from "../types";
+import { attachAuthHeader } from "../utils/attachAuthHeader";
 
 const axiosInstance = axios.create({
   baseURL: "https://chat-app-backend-q3h4.onrender.com/api/conversations",
 });
 
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
-    }
-
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  },
-);
+attachAuthHeader(axiosInstance);
 
 export const getUserConversations = async (
   userId: string,

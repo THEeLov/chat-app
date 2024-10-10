@@ -25,7 +25,7 @@ const UserMessagesWindow = () => {
           <Box>
             Hi&nbsp;<b>{user?.username} 👋</b>
           </Box>
-          <Typography variant="body2" component="h3">
+          <Typography variant="body2">
             Select conversation to start chatting
           </Typography>{" "}
         </Typography>

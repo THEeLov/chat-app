@@ -2,7 +2,7 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import SearchUserForm from "../../forms/SearchUserForm";
 import { useUserConversations } from "../../hooks/useUser";
 import useAuthData from "../../hooks/useAuthData";
-import { useSocketContext } from "../../hooks/contexts/useSocket";
+import { useSocketContext } from "../../hooks/contexts/useSocketContext";
 import { useListenConversations } from "../../hooks/useListenOnSocket";
 import UserCard from "./UserCard";
 

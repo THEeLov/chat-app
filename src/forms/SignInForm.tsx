@@ -34,7 +34,7 @@ const SignInForm = () => {
           message:
             statusCode === 401
               ? "Invalid email or password"
-              : "Internal server error",
+              : "Server is probably down try again later",
         });
       }
     }

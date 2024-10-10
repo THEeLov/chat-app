@@ -5,23 +5,22 @@ import BackgroundImage from "../assets/pikachu-4k-ai-1920x1080.jpg";
 const MainLayout = () => {
   return (
     <Box
-      sx={{
-        minHeight: "100vh",
-        width: "100vw",
-        overflow: "hidden",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+      minHeight="100vh"
+      width="100vw"
+      overflow="hidden"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
     >
       {/* Background Image Layer */}
       <Box
+        position="fixed"
+        top="0"
+        left="0"
+        right="0"
+        bottom="0"
+        zIndex="-1"
         sx={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
           backgroundImage: `url(${BackgroundImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
