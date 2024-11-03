@@ -4,7 +4,7 @@ import { SignInUser, SignUpUser } from "../models/auth";
 import { SignInData } from "../types";
 
 const axiosInstance = axios.create({
-  baseURL: "https://chat-app-backend-q3h4.onrender.com/api/auth",
+  baseURL: "https://chat-app-backend-production-daf6.up.railway.app/api/auth",
 });
 
 export const signInUser = async (data: SignInUser): Promise<SignInData> => {

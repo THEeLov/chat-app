@@ -3,7 +3,7 @@ import { Conversation, ConversationCreate } from "../types";
 import { attachAuthHeader } from "../utils/attachAuthHeader";
 
 const axiosInstance = axios.create({
-  baseURL: "https://chat-app-backend-q3h4.onrender.com/api/conversations",
+  baseURL: "https://chat-app-backend-production-daf6.up.railway.app/api/conversations",
 });
 
 attachAuthHeader(axiosInstance);

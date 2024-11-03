@@ -4,7 +4,7 @@ import { Message } from "../types";
 import { attachAuthHeader } from "../utils/attachAuthHeader";
 
 const axiosInstance = axios.create({
-  baseURL: "https://chat-app-backend-q3h4.onrender.com/api/messages",
+  baseURL: "https://chat-app-backend-production-daf6.up.railway.app/api/messages",
 });
 
 attachAuthHeader(axiosInstance);
